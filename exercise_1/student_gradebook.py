@@ -52,27 +52,28 @@ def view_student_report(gradebook):
 
 def class_statistics(gradebook):
     if not gradebook:
-        print("No students in gradebook")
+        print("No students in gradebook.")
         return
-    total_grade =[]
-    student_average = {}
+    total_grades = []
+    student_averages = {}
 
-    for student, grade in gradebook.items():
-        if grade:
-            avg = sum(grade) / len(grade)
-            student.averages[student] = avg
-            total_grade.extend(grade)
-    if not student_average:
+    for student, grades in gradebook.items():
+        if grades:
+            avg = sum(grades) / len(grades)
+            student_averages[student] = avg
+            total_grades.extend(grades)
+
+    if not student_averages:
         print("No grades to calculate statistics.")
         return
-    
-    class_avg = sum(total_grade) / len(grade)
-    highest_average= max(student_average, key=student_average.get)
-    lowest_average = min(student_average, key=student_average)
 
-    print(f"Class Average: {class_avg:.2}")
-    print(f"Top Student: {highest_average}")
-    print(f"Lowest averate: {lowest_average}")
+    class_avg = sum(total_grades) / len(total_grades)
+    highest_student = max(student_averages, key=student_averages.get)
+    lowest_student = min(student_averages, key=student_averages.get)
+
+    print(f"Class Average: {class_avg:.2f}")
+    print(f"Top Student: {highest_student} ({student_averages[highest_student]:.2f})")
+    print(f"Lowest Student: {lowest_student} ({student_averages[lowest_student]:.2f})")
 
 while True:
     print("\n_____Student GRADEBOOK MANAGER______")
